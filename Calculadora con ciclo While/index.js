@@ -1,11 +1,10 @@
 var numerUno, numerDos;
 var seleccion;
-var opciones;
+var opciones = document.getElementsByName("op");
 
 function validar(){
     numerUno = document.getElementById("numU").value;
     numerDos = document.getElementById("numD").value;  
-    opciones = document.getElementsByName("op");
     seleccion = false;
     
     if(numerUno === "")
@@ -46,9 +45,9 @@ function operaciones()
 {
     var opU = parseInt(numerUno);
     var opD = parseInt(numerDos);
-    var res,resultado;
-
-    for(var i=0; i<opciones.length; i++) {    
+    var res,resultado,i;
+    i = 0;
+    while(i<opciones.length) {   
         if(opciones[i].checked) {
             seleccion = true;
                 switch (i)
@@ -97,6 +96,7 @@ function operaciones()
                 }
                 break;
             }
+            i++;
             }
         if(!seleccion){
             Swal.fire({
@@ -107,6 +107,8 @@ function operaciones()
                 });
     return false;
     }
+    
+
 }
  
 function limpiar ()
