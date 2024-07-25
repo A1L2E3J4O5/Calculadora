@@ -12,7 +12,7 @@ function validar(){
     {
         Swal.fire({
             title: '¡Error!',
-            text: 'casilla Vacia.',
+            text: 'primer casilla Vacia.',
             icon: 'error',
             confirmButtonText: '¡Aceptar!'
             });
@@ -21,7 +21,7 @@ function validar(){
     {
         Swal.fire({
             title: '¡Error!',
-            text: 'casilla Vacia.',
+            text: ' segunda casilla Vacia.',
             icon: 'error',
             confirmButtonText: '¡Aceptar!'
             });
@@ -78,10 +78,12 @@ function operaciones()
                             {
                                 Swal.fire({
                                     title: '¡Error!',
-                                    text: 'operacion invalida',
+                                    text: 'operacion indefinida',
                                     icon: 'error',
                                     confirmButtonText: '¡Aceptar!'
                                     });
+                                    resultado= document.getElementById("resultado");
+                                    resultado.value = "";
                             }
                             else
                             {
@@ -96,7 +98,6 @@ function operaciones()
                 break;
             }
             }
-            
         if(!seleccion){
             Swal.fire({
                 title: '¡Error!',
@@ -108,7 +109,6 @@ function operaciones()
     }
 }
  
-
 function limpiar ()
 {
     document.getElementById("numU").value = "";
