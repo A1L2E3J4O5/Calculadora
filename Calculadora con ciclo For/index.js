@@ -3,6 +3,7 @@ var seleccion;
 var opciones;
 
 function validar(){
+    //alert ('Entra');
     numerUno = document.getElementById("numU").value;
     numerDos = document.getElementById("numD").value;  
     opciones = document.getElementsByName("op");
@@ -26,7 +27,7 @@ function validar(){
             confirmButtonText: '¡Aceptar!'
             });
     }
-    else if(!/^\d+$/.test(numerUno || numerDos))
+    else if(!/^\d+$/.test(numerUno) && !/^\d+$/.test(numerDos))
         {
             Swal.fire({
                 title: '¡Error!',
@@ -38,87 +39,94 @@ function validar(){
         }
     else
     {
-        operaciones()
+        operaciones();
     }
 
-}
-function operaciones()
-{
-    var opU = parseInt(numerUno);
-    var opD = parseInt(numerDos);
-    var res,resultado;
-
-    for(var i=0; i<opciones.length; i++) {    
-        if(opciones[i].checked) {
-            seleccion = true;
-                switch (i)
-                {
-                    case 0:
-                        res = opU+opD;
-                        resultado= document.getElementById("resultado");
-                        resultado.value = "El resultado es: " + res;
-                        resultado.style.display = 'block';
-                        break;
-                    case 1:
-                        res = opU-opD;
-                        resultado= document.getElementById("resultado");
-                        resultado.value = "El resultado es: " + res;
-                        resultado.style.display = 'block';
-
-                        break;
-                    case 2:
-                        res = opU*opD;
-                        resultado= document.getElementById("resultado");
-                        resultado.value = "El resultado es: " + res;
-                        resultado.style.display = 'block';
-
-                        break;
-                    case 3:
-                            if(opD === 0)
+    function operaciones()
+    {
+        //alert ('Entra');
+        var opU = parseInt(numerUno);
+        var opD = parseInt(numerDos);
+        var res,resultado;
+    
+            if ((opU<0 || opD<0)|| (opU<0 && opD<0)){
+                alert ('No debe Ingresar Número Negativos');
+            }
+            else{
+                //alert ('Valores Apropiados');
+                for(var i=0; i<opciones.length; i++) {    
+                    if(opciones[i].checked) {
+                        seleccion = true;
+                            switch (i)
                             {
-                                Swal.fire({
-                                    title: '¡Error!',
-                                    text: 'operacion indefinida',
-                                    icon: 'error',
-                                    confirmButtonText: '¡Aceptar!'
-                                    });
+                                case 0:
+                                    res = opU+opD;
                                     resultado= document.getElementById("resultado");
-                                    resultado.value = "";
+                                    resultado.value = "El resultado es: " + res;
+                                    resultado.style.display = 'block';
+                                    break;
+                                case 1:
+                                    res = opU-opD;
+                                    resultado= document.getElementById("resultado");
+                                    resultado.value = "El resultado es: " + res;
+                                    resultado.style.display = 'block';
+            
+                                    break;
+                                case 2:
+                                    res = opU*opD;
+                                    resultado= document.getElementById("resultado");
+                                    resultado.value = "El resultado es: " + res;
+                                    resultado.style.display = 'block';
+            
+                                    break;
+                                case 3:
+                                        if(opD === 0)
+                                        {
+                                            Swal.fire({
+                                                title: '¡Error!',
+                                                text: 'operacion indefinida',
+                                                icon: 'error',
+                                                confirmButtonText: '¡Aceptar!'
+                                                });
+                                                resultado= document.getElementById("resultado");
+                                                resultado.value = "";
+                                        }
+                                        else
+                                        {
+                                            res = opU/opD;
+                                            resultado= document.getElementById("resultado");
+                                            resultado.value = "El resultado es: " + res;
+                                            resultado.style.display = 'block';
+            
+                                        }
+                                    break;
                             }
-                            else
-                            {
-                                res = opU/opD;
-                                resultado= document.getElementById("resultado");
-                                resultado.value = "El resultado es: " + res;
-                                resultado.style.display = 'block';
-
-                            }
-                        break;
-                }
-                break;
+                            break;
+                        }
+                        }// cierra ciclo for
             }
-            }
-        if(!seleccion){
-            Swal.fire({
-                title: '¡Error!',
-                text: 'Seleccione alguna operacion',
-                icon: 'error',
-                confirmButtonText: '¡Aceptar!'
-                });
-    return false;
+            if(!seleccion){
+                Swal.fire({
+                    title: '¡Error!',
+                    text: 'Seleccione alguna operacion',
+                    icon: 'error',
+                    confirmButtonText: '¡Aceptar!'
+                    });
+        return false;
+        }
+        }//cierra funcion operaciones
     }
-}
-function limpiar ()
-{
-    document.getElementById("numU").value = "";
-    document.getElementById("numD").value = "";
-
-    let radios = document.getElementsByName("op");
-            for (let i = 0; i < radios.length; i++) {
-                radios[i].checked = false;
-            }
-
-    let resultado = document.getElementById("resultado");
-    resultado.value = "";
-    resultado.style.display = 'none';
-}
+    function limpiar ()
+    {
+        document.getElementById("numU").value = "";
+        document.getElementById("numD").value = "";
+    
+        let radios = document.getElementsByName("op");
+                for (let i = 0; i < radios.length; i++) {
+                    radios[i].checked = false;
+                }
+    
+        let resultado = document.getElementById("resultado");
+        resultado.value = "";
+        resultado.style.display = 'none';
+    } 
